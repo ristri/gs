@@ -5,6 +5,8 @@ import { Subjectlist } from '../api/Subjectlist';
 import { Studentlist } from '../api/Studentlist';
 import Infolist from './Infolist.js';
 import { Stusublist } from '../api/Stusublist';
+import Button from 'muicss/lib/react/button';
+
 class Information extends Component {
      constructor(props){
          super(props);
@@ -45,9 +47,9 @@ class Information extends Component {
         <option value="Late Night">Late Night</option>
         </select>
 
-          <button onClick={this.submitHandler.bind(this)}>
+          <Button color="accent" onClick={this.submitHandler.bind(this)}>
              Submit
-          </button>
+          </Button>
           </div>
          );}
          else{

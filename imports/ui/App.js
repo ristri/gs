@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 
+
 import { withTracker } from 'meteor/react-meteor-data';
 
 import AccountsUIWrapper from './AccountsUIWrapper.js';
@@ -9,6 +10,14 @@ import { Studentlist } from '../api/Studentlist';
 import { Accounts } from 'meteor/accounts-base';
 import Info from './Info.js';
 import Intro from './Intro.js';
+import Appbar from "muicss/lib/react/appbar";
+
+let s1 = { verticalAlign: "middle", textAlign: "left" };
+let s2 = { textAlign: "left" };
+const navstyles = {
+    background:
+    "linear-gradient(to left, #642b73, #c6426e)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    };
 
 class App extends Component {
     fcheck(){
@@ -27,15 +36,19 @@ class App extends Component {
         return(
             <div>
                 
-    {/* <Navbar color="blue-grey lighten-2" light> */}
-    <AccountsUIWrapper/>
-    {/* <NavbarBrand tag="span" >
-        Heading
-    </NavbarBrand>
-    <NavItem>
-        
-        </NavItem>
-    </Navbar> */}
+                <Appbar style={navstyles}>
+<table width="100%">
+<tbody>
+<tr style={s1}>
+<td className="mui--appbar-height"><AccountsUIWrapper/></td>
+<td className="mui--appbar-height" style={s2}>
+<img src="https://s18.postimg.org/awntbtx49/logo.png"/>
+</td>
+</tr>
+</tbody>
+</table>
+</Appbar>
+    
     {Meteor.userId() ? 
     <div>
         <Info flag={this.fcheck()} />

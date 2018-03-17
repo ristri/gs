@@ -4,6 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Subjectlist } from '../api/Subjectlist';
 import { Studentlist } from '../api/Studentlist';
 import { Stusublist } from '../api/Stusublist';
+
 class Infolist extends Component {
 
     constructor(props){
