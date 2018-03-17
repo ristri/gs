@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Navbar, NavbarBrand , NavItem} from 'mdbreact';
+
 import { withTracker } from 'meteor/react-meteor-data';
 
 import AccountsUIWrapper from './AccountsUIWrapper.js';
@@ -27,15 +27,15 @@ class App extends Component {
         return(
             <div>
                 
-    <Navbar color="blue-grey lighten-2" light>
+    {/* <Navbar color="blue-grey lighten-2" light> */}
     <AccountsUIWrapper/>
-    <NavbarBrand tag="span" >
+    {/* <NavbarBrand tag="span" >
         Heading
     </NavbarBrand>
     <NavItem>
         
         </NavItem>
-    </Navbar>
+    </Navbar> */}
     {Meteor.userId() ? 
     <div>
         <Info flag={this.fcheck()} />
