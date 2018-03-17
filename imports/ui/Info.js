@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import Information from 'Information.js';
+import Information from './Information.js';
+import { Subjectlist } from '../api/Subjectlist';
+import { Studentlist } from '../api/Studentlist';
 
-
-class App extends Component {
+class Info extends Component {
 
     render(){
-        if(flag==0){
-          return(<Information />);
+        if(this.props.flag==0){
+          return(<div>Hi</div>);
         }
         else{
-          return(<Feed />)
+          return(<Information />)
         }
     }
 }
-
 export default withTracker(() => {
     return {
         currentUser: Meteor.user(),

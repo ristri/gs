@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Navbar, NavbarBrand , NavItem} from 'mdbreact'
+import { Navbar, NavbarBrand , NavItem} from 'mdbreact';
 import { withTracker } from 'meteor/react-meteor-data';
 
 import AccountsUIWrapper from './AccountsUIWrapper.js';
 import { Subjectlist } from '../api/Subjectlist';
 import { Studentlist } from '../api/Studentlist';
 import { Accounts } from 'meteor/accounts-base';
-import Info from 'Info.js';
+import Info from './Info.js';
+import Intro from './Intro.js';
 
 class App extends Component {
     fcheck(){
@@ -20,15 +21,6 @@ class App extends Component {
         }
         return flag;
       }
-       
-   checkrender(){
-       if(this.fcheck()==1){
-           return(<div>1st</div>);
-       }
-       else{
-           return(<div>feed</div>);
-       }
-   }
 
     render(){
      console.log(Meteor.userId());
@@ -44,9 +36,10 @@ class App extends Component {
         
         </NavItem>
     </Navbar>
+    {Meteor.userId() ? 
     <div>
         <Info flag={this.fcheck()} />
-    </div>
+    </div> : <Intro />}
     
     </div>
         );
