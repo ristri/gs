@@ -7,10 +7,12 @@ import {Feedlist} from '../api/Feedlist.js';
 import Button from 'muicss/lib/react/button';
 import Container from 'muicss/lib/react/container';
 import Panel from 'muicss/lib/react/panel';
+import moment from 'moment';
+import {Stusublist} from '../api/Stusublist.js';
 class Feed extends Component {
      constructor(props){
          super(props);
-         this.state={fl:0};
+         this.state={fl:0,fl1:false,fl2:true};
      }
      clickHandler(){
          this.setState({fl:1});
@@ -25,16 +27,50 @@ class Feed extends Component {
          var name = Studentlist.find({userid:Meteor.userId()}).fetch()[0].name;
          Feedlist.insert({eventname:n,eventplace:p,eventdate:d,eventtime:t,participants:[name]});
      }
+     studypHandler(){
+         this.setState({fl1:!this.state.fl1});
+     }
+
      renderFeed(){
-        return this.props.Feedlist.map((event,i) => (
+         var filterList = this.props.Feedlist.filter(feedvalue => (moment().format('YYYY-MM-DD')<feedvalue.eventdate))
+        return filterList.map((event,i) => (
             <FeedTab key={i} n={event.eventname} p={event.eventplace} d={event.eventdate} t={event.eventtime} l={event.participants}/>  
          ));
+     }
+
+     renderOption(){
+         console.log(1);
+         var list=(Stusublist.find({userid:Meteor.userId()}).fetch()[0].subjects);
+         return list.map((sub,i) => (<option key={i} value={sub.subname}>{sub.subname}</option>));
+     }
+
+     studypSubmit(){
+         this.setState({fl2:!this.state.fl2});
      }
     render(){  
         if(this.state.fl==0){
           return(<Container>
               <Panel><div>
            <Button color="accent" onClick={this.clickHandler.bind(this)}>Create Study Event</Button>
+            <Button color="accent" onClick={this.studypHandler.bind(this)}>Find Study Partner</Button>
+            {this.state.fl1 ? <div>
+              { this.state.fl2?
+                <div>
+                <select ref="selectedsub">
+                {this.renderOption()}
+                </select>
+                <select ref="selecttime" >
+                <option value="Morning">Morning</option>
+                <option value="Afternoon">Afternoon</option>
+                <option value="Evening">Evening</option>
+                <option value="Night">Night</option>
+                <option value="Late Night">Late Night</option>
+               </select>
+               <Button color="accent" onClick={this.studypSubmit.bind(this)}>Go</Button>
+              </div>: <div><div>list</div><Button color="accent" onClick={this.studypSubmit.bind(this)}>Find Another Partner</Button></div>
+              }
+        </div> :'' }
+            
            {this.renderFeed()}
            </div>
            </Panel>
@@ -49,6 +85,26 @@ class Feed extends Component {
             <input id="meeting" type="date" ref="eventdate"/>
             <input type="time" ref="eventtime" name="time"/>
             <button onClick={this.clickHandler1.bind(this)}>Create Event</button>
+            
+            <Button color="accent" onClick={this.studypHandler.bind(this)}>Find Study Partner</Button>
+            {this.state.fl1 ? <div>
+              { this.state.fl2?
+                <div>
+                <select ref="selectedsub">
+                {this.renderOption()}
+                </select>
+                <select ref="selecttime" >
+                <option value="Morning">Morning</option>
+                <option value="Afternoon">Afternoon</option>
+                <option value="Evening">Evening</option>
+                <option value="Night">Night</option>
+                <option value="Late Night">Late Night</option>
+               </select>
+               <Button color="accent" onClick={this.studypSubmit.bind(this)}>Go</Button>
+              </div>: <div><div>list</div><Button color="accent" onClick={this.studypSubmit.bind(this)}>Find Another Partner</Button></div>
+              }
+        </div> :'' }
+            
             {this.renderFeed()}
           </div>
           </Container>
@@ -60,8 +116,8 @@ export default withTracker(() => {
     return {
         currentUser: Meteor.user(),
         Studentlist: Studentlist.find({}).fetch(),
-        Feedlist: Feedlist.find({}).fetch(),
-
+        Feedlist: Feedlist.find({},{sort:{eventdate:1}}).fetch(),
+        Stusublist: Stusublist.find({}).fetch(),
        
     };
   })(Feed);
