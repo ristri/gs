@@ -4,6 +4,9 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Subjectlist } from '../api/Subjectlist';
 import { Studentlist } from '../api/Studentlist';
 import { Stusublist } from '../api/Stusublist';
+import Panel from 'muicss/lib/react/panel';
+
+
 
 class Infolist extends Component {
 
@@ -59,19 +62,21 @@ class Infolist extends Component {
     
    render() {
        return(
+           <Panel>
              <div>
              <input
              type="checkbox"
              
             onClick={this.toggleChecked.bind(this)}
               />
-             
+             {this.props.subname}
              <div>
-            {this.props.subname}
+            
              </div>
-             { this.state.check?<input type="number" ref="prof" onChange={this.changeHandler.bind(this)}/>:''
+             { this.state.check?<input className="text" type="number" ref="prof" onChange={this.changeHandler.bind(this)}/>:''
              }
-            </div>   
+            </div>
+            </Panel>   
        );
    }
 }

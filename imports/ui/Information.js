@@ -6,6 +6,10 @@ import { Studentlist } from '../api/Studentlist';
 import Infolist from './Infolist.js';
 import { Stusublist } from '../api/Stusublist';
 import Button from 'muicss/lib/react/button';
+import Container from 'muicss/lib/react/container';
+import Row from 'muicss/lib/react/row';
+import Col from 'muicss/lib/react/col';
+import Panel from 'muicss/lib/react/panel';
 
 class Information extends Component {
      constructor(props){
@@ -15,7 +19,7 @@ class Information extends Component {
     
     renderTasks() {
         return this.props.Subjectlist.map((name,i) => (
-           <Infolist key={i} subname={name.name} />  
+            <Col md="4"> <Infolist key={i} subname={name.name} />  </Col>
         ));
     }
 
@@ -29,16 +33,31 @@ class Information extends Component {
     }
     
     render(){
-       
-        if(this.state.fl==false)
-        {
+        
         return(
+            <Container> 
+                <Row>
             <div>
-           Welcome 
-          <input type="text" ref="name" />
+                <Panel>
+                <Col md="12">
+           Welcome <br/><br/><br/>
+           </Col>
+           <Col md="12">
+           <div className="group">  
+           <input className="text" type="text" placeholder="Full Name" ref="name" />    
+      <span className="highlight"></span>
+      <span className="bar"></span>
+      <label>Name</label>
+    </div>
+          
+          </Col>
+          </Panel>
           
           {this.renderTasks()}
 
+            
+                <Col md="12">
+                <Panel>
           <select ref="avltime" >
         <option value="Morning">Morning</option>
         <option value="Afternoon">Afternoon</option>
@@ -46,16 +65,21 @@ class Information extends Component {
         <option value="Night">Night</option>
         <option value="Late Night">Late Night</option>
         </select>
-
+        </Panel>
+        </Col>
+        <Col md="12">
+        <Panel>
           <Button color="accent" onClick={this.submitHandler.bind(this)}>
              Submit
           </Button>
+          </Panel>
+          </Col>
+         
           </div>
+          </Row>
+          </Container>
          );}
-         else{
-             return(<div>feed</div>);
-         }
-    }
+    
 }
 
 

@@ -16,8 +16,9 @@ let s1 = { verticalAlign: "middle", textAlign: "left" };
 let s2 = { textAlign: "left" };
 const navstyles = {
     background:
-    "linear-gradient(to left, #642b73, #c6426e)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    "linear-gradient(to right, #642b73, #c6426e)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     };
+    let imgstyle = { display : "block" , marginLeft : "auto" , marginRight : "10px" ,maxHeight : "70%" , maxWidth: "80%"};
 
 class App extends Component {
     fcheck(){
@@ -42,7 +43,7 @@ class App extends Component {
 <tr style={s1}>
 <td className="mui--appbar-height"><AccountsUIWrapper/></td>
 <td className="mui--appbar-height" style={s2}>
-<img src="https://s18.postimg.org/awntbtx49/logo.png"/>
+<img style={imgstyle} src="https://s18.postimg.org/awntbtx49/logo.png"/>
 </td>
 </tr>
 </tbody>

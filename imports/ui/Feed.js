@@ -35,7 +35,7 @@ class Feed extends Component {
      renderFeed(){
          var filterList = this.props.Feedlist.filter(feedvalue => (moment().format('YYYY-MM-DD')<feedvalue.eventdate))
         return filterList.map((event,i) => (
-            <FeedTab key={i} n={event.eventname} p={event.eventplace} d={event.eventdate} t={event.eventtime} l={event.participants}/>  
+            <FeedTab  key={i} n={event.eventname} p={event.eventplace} d={event.eventdate} t={event.eventtime} l={event.participants}/>  
          ));
      }
 
