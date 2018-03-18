@@ -9,6 +9,7 @@ import Container from 'muicss/lib/react/container';
 import Panel from 'muicss/lib/react/panel';
 import moment from 'moment';
 import {Stusublist} from '../api/Stusublist.js';
+import Partnerlist from './Partnerlist.js';
 class Feed extends Component {
      constructor(props){
          super(props);
@@ -39,9 +40,40 @@ class Feed extends Component {
      }
 
      renderOption(){
-         console.log(1);
          var list=(Stusublist.find({userid:Meteor.userId()}).fetch()[0].subjects);
          return list.map((sub,i) => (<option key={i} value={sub.subname}>{sub.subname}</option>));
+     }
+
+     listofparteners(){
+          var sub = ReactDOM.findDOMNode(this.refs.selectedsub).value.trim();
+          var time = ReactDOM.findDOMNode(this.refs.selecttime).value.trim();
+          var list = [];
+          for(var i=0;i<this.props.Studentlist.length;i++){
+              if(this.props.Studentlist[i].timeav==time){
+                  var flagcheck = 0;
+                  var sl = [];
+                  var id = this.props.Studentlist[i].userid;
+                  if(id==Meteor.userId()){
+
+                  }
+                  else{
+                  var sl = Stusublist.find({userid:id}).fetch()[0].subjects;
+                   console.log(sl);
+                  for(var j=0;j<sl.length;j++){
+                      if(sl[j].subname==sub){
+                          console.log(1);
+                          flagcheck = 1;
+                          break;
+                      }
+                  }
+                  if(flagcheck==1){
+                      list.push(this.props.Studentlist[i].name);
+                  }
+                }
+              }
+          }
+         console.log(list);
+          return list;
      }
 
      studypSubmit(){
@@ -67,7 +99,7 @@ class Feed extends Component {
                 <option value="Late Night">Late Night</option>
                </select>
                <Button color="accent" onClick={this.studypSubmit.bind(this)}>Go</Button>
-              </div>: <div><div>list</div><Button color="accent" onClick={this.studypSubmit.bind(this)}>Find Another Partner</Button></div>
+              </div>: <div><Partnerlist l={this.listofparteners()}/><Button color="accent" onClick={this.studypSubmit.bind(this)}>Find Another Partner</Button></div>
               }
         </div> :'' }
             
@@ -101,7 +133,7 @@ class Feed extends Component {
                 <option value="Late Night">Late Night</option>
                </select>
                <Button color="accent" onClick={this.studypSubmit.bind(this)}>Go</Button>
-              </div>: <div><div>list</div><Button color="accent" onClick={this.studypSubmit.bind(this)}>Find Another Partner</Button></div>
+              </div>: <div><Partnerlist l={this.listofparteners()}/><Button color="accent" onClick={this.studypSubmit.bind(this)}>Find Another Partner</Button></div>
               }
         </div> :'' }
             
