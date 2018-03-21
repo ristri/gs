@@ -10,10 +10,12 @@ import Panel from 'muicss/lib/react/panel';
 import moment from 'moment';
 import {Stusublist} from '../api/Stusublist.js';
 import Partnerlist from './Partnerlist.js';
+import Information from './Information.js';
+import Profile from './Profile.js';
 class Feed extends Component {
      constructor(props){
          super(props);
-         this.state={fl:0,fl1:false,fl2:true};
+         this.state={fl:0,fl1:false,fl2:true,mp:true};
      }
      clickHandler(){
          this.setState({fl:1});
@@ -97,9 +99,13 @@ class Feed extends Component {
      studypSubmit(){
          this.setState({fl2:!this.state.fl2});
      }
-    render(){  
+
+     clickHandlermain(){
+         this.setState({mp:!this.state.mp});
+     }
+    render(){  if(this.state.mp){
         if(this.state.fl==0){
-          return(<Container>
+          return(<Container><Button color="accent" onClick={this.clickHandlermain.bind(this)}>Profile</Button>
               <Panel><div>
            <Button color="accent" onClick={this.clickHandler.bind(this)}>Create Study Event</Button>
             <Button color="accent" onClick={this.studypHandler.bind(this)}>Find Study Partner</Button>
@@ -128,7 +134,7 @@ class Feed extends Component {
            
         }
         else{
-       return(<Container>
+       return(<Container><Button color="accent" onClick={this.clickHandlermain.bind(this)}>Profile</Button>
           <div>
             <input type="text" ref="eventname" placeholder="subject name"/>
             <input type="text" ref="eventplace" placeholder="where"/>
@@ -160,6 +166,13 @@ class Feed extends Component {
           </Container>
           );
         }
+    }
+    else{
+        return(<div>
+            <Profile />
+            <Button color="accent" onClick={this.clickHandlermain.bind(this)}>Back</Button>
+        </div>);
+    }
     }
 }
 export default withTracker(() => {
