@@ -73,7 +73,7 @@ class Infolist extends Component {
              <div>
             
              </div>
-             { this.state.check?<input className="text" type="number" ref="prof" onChange={this.changeHandler.bind(this)}/>:''
+             { this.state.check?<input className="text" type="number" placeholder="proficiency(1-5)" ref="prof" onChange={this.changeHandler.bind(this)}/>:''
              }
             </div>
             </Panel>   

@@ -33,7 +33,7 @@ class App extends Component {
       }
 
     render(){
-     console.log(Meteor.userId());
+    //  console.log(Meteor.userId());
         return(
             <div>
                 

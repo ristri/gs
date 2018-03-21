@@ -19,8 +19,8 @@ export default class Example extends React.Component {
   jcheck(){
     var temp = false;
     var name = Studentlist.find({userid:Meteor.userId()}).fetch()[0].name;
-    console.log(name);
-    console.log(this.props.l);
+    // console.log(name);
+    // console.log(this.props.l);
     for(var i=0;i<this.props.l.length;i++){
       if(name==this.props.l[i]){
         temp = true;break;

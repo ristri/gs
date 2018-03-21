@@ -25,6 +25,7 @@ class Feed extends Component {
          var p = ReactDOM.findDOMNode(this.refs.eventplace).value.trim();
          var d = ReactDOM.findDOMNode(this.refs.eventdate).value.trim();
          var t = ReactDOM.findDOMNode(this.refs.eventtime).value.trim();
+         console.log(t);
          var name = Studentlist.find({userid:Meteor.userId()}).fetch()[0].name;
          Feedlist.insert({eventname:n,eventplace:p,eventdate:d,eventtime:t,participants:[name]});
      }
@@ -63,16 +64,20 @@ class Feed extends Component {
                       if(sl[j].subname==sub){
                           console.log(1);
                           flagcheck = 1;
+                          var prof = sl[j].prof;
                           break;
                       }
                   }
                   if(flagcheck==1){
-                      list.push(this.props.Studentlist[i].name);
+                      var obj = [this.props.Studentlist[i].name,prof];
+                      console.log(obj);
+                      list.push(obj);
+
                   }
                 }
               }
           }
-         console.log(list);
+        //  console.log(list);
           return list;
      }
 

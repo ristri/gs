@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class Intro extends Component {
    renderL(){
-       return this.props.l.map((p)=> (<li>{p}</li>));
+       return this.props.l.map((p,i)=> (<li key={i}>{p[0]}  {p[1]}</li>));
    }
    
     render(){
