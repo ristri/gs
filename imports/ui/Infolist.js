@@ -19,7 +19,7 @@ class Infolist extends Component {
        if(!this.state.check){
        }
        
-       else{   console.log("delete");
+       else{   
         var sub = this.props.subname;
         var temp1 = Stusublist.find({userid:Meteor.userId()}).fetch();
         var temp = temp1[0].subjects;

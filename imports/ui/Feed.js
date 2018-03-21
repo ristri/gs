@@ -77,6 +77,19 @@ class Feed extends Component {
                 }
               }
           }
+          for(var i=0;i<list.length;i++){
+              for(var j=i+1;j<list.length;j++){
+                  if(list[i][1]>list[j][1])
+                  {
+                      var t1=list[i][0];
+                      list[i][0]=list[j][0];
+                      list[j][0]=t1;
+                      var t2=list[i][1];
+                      list[i][1]=list[j][1];
+                      list[j][1]=t1;
+                  }
+              }
+          }
         //  console.log(list);
           return list;
      }
